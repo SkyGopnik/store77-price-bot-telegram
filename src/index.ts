@@ -18,7 +18,7 @@ import "@commands";
 moment.locale('ru');
 
 (async () => {
-  await db.sync({ force: false });
+  await db.sync({ force: true });
 
   console.log("Store77 Price Watcher Bot Started")
 })();

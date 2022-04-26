@@ -10,7 +10,7 @@ import {
 export default class LinkModel extends Model {
 
   @Column
-  chatId: number;
+  chatId: string;
 
   @Column
   link: string;
