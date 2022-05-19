@@ -28,5 +28,6 @@ bot.onText(/\/test/, () => Links.checkPrices());
 bot.on('callback_query', async (callbackQuery) => {
   await bot.answerCallbackQuery(callbackQuery.id);
 
-  console.log(callbackQuery.message);
+  console.log(callbackQuery);
+  // console.log(callbackQuery.message);
 });
