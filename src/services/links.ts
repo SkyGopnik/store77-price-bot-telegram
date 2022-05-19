@@ -72,10 +72,12 @@ export default class Links {
         const newPrice = numberFormat(+price);
         const oldPrice = numberFormat(lastPrice);
 
+        const priceIsUp = newPrice > oldPrice;
+
         await Promise.all([
           bot.sendMessage(
             item.get("chatId"),
-            `🔥 *${item.get("name")}* 🔥\n\n*Новая цена:* ${newPrice} рублей\n_Старая цена:_ ${oldPrice} рублей`,
+            `🔥 *${item.get("name")}* _(ID - ${item.get("id")})_ 🔥\n\nЦена *${priceIsUp ? "повысилась" : "понизилась"}*\n_Старая цена:_ ${oldPrice} рублей\n*Новая цена:* ${newPrice} рублей`,
             {
               parse_mode: 'Markdown'
             }

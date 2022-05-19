@@ -35,9 +35,14 @@ export default async function info(msg: Message, match: RegExpMatchArray | null)
     return `${price} рублей - ${moment(item.get("createdAt")).format('LL')}`;
   });
 
+  const onlyPrices = [...link.get("info").map((item) => item.get("price"))];
+
+  const lowestPrice = Math.min.apply(null, onlyPrices);
+  const highestPrice = Math.max.apply(null, onlyPrices);
+
   return bot.sendMessage(
     chatId,
-    `*Информация о ${link.get("name")}*\n\nЦены:\n${prices.join("\n")}`,
+    `*Информация о ${link.get("name")}* _(ID - ${link.get("id")})_\n\n*Пики цен*\n+ Максимальная - ${highestPrice}\n- Минимальная - ${lowestPrice}\n\n*Изменение цен*\n${prices.join("\n")}`,
     {
       parse_mode: 'Markdown'
     }

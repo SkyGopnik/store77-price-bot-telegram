@@ -13,7 +13,7 @@ export default async function list(msg: Message) {
 
   return bot.sendMessage(
     chatId,
-    `*Информация о всех отслеживаемых ссылках*\n\n${text.join("\n")}`,
+    `*Информация о всех отслеживаемых ссылках*\n\n${text.join("\n\n")}`,
     {
       parse_mode: 'Markdown'
     }
