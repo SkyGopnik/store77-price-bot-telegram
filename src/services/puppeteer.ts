@@ -17,6 +17,10 @@ export default class PuppeteerService {
       .replace("—", "")
       .replace(/\s/g, '');
 
+    if (+price <= 0) {
+      throw Error("Price not valid");
+    }
+
     const image = $('.slick-current:first').find('img').attr('src');
 
     return {
