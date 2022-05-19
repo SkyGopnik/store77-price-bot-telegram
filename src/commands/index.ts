@@ -24,3 +24,9 @@ bot.onText(/\/info (.+)/, info);
 bot.onText(/\/remove (.+)/, remove);
 
 bot.onText(/\/test/, () => Links.checkPrices());
+
+bot.on('callback_query', async (callbackQuery) => {
+  await bot.answerCallbackQuery(callbackQuery.id);
+
+  console.log(callbackQuery.message);
+});
