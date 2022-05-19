@@ -12,7 +12,7 @@ export default async function list(msg: Message) {
   const text = list.map((item) => `[${item.get("name")}](${item.get("link")}) _(ID - ${item.get("id")})_`);
 
   const buttons = list.map((item) => ({
-    text: `Инфо ${item.get("id")}`,
+    text: item.get("id"),
     callback_data: `/info ${item.get("id")}`
   }));
 

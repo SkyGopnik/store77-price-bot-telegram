@@ -1,3 +1,4 @@
+import InfoService from "@services/info";
 import Links from "@services/links";
 import TelegramBot from "node-telegram-bot-api";
 
@@ -26,18 +27,21 @@ bot.onText(/\/remove (.+)/, remove);
 bot.onText(/\/test/, () => Links.checkPrices());
 
 bot.on('callback_query', async (callbackQuery) => {
-  await bot.answerCallbackQuery(callbackQuery.id);
+  const { id, data } = callbackQuery;
 
-  if (!callbackQuery.data) {
+  await bot.answerCallbackQuery(id);
+
+  if (!data) {
     return;
   }
 
-  if (/\/info (.+)/.test(callbackQuery.data)) {
-    const id = callbackQuery.data.split(" ")[1];
+  if (/\/info (.+)/.test(data)) {
+    const id = data.split(" ")[1];
 
-    console.log(id);
+    if (!callbackQuery.message) {
+      return;
+    }
+
+    return InfoService.get(callbackQuery.message?.chat.id, id);
   }
-
-  console.log(callbackQuery);
-  // console.log(callbackQuery.message);
 });
