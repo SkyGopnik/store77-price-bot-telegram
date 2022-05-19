@@ -11,6 +11,11 @@ export default async function list(msg: Message) {
 
   const text = list.map((item) => `[${item.get("name")}](${item.get("link")}) _(ID - ${item.get("id")})_`);
 
+  const buttons = list.map((item) => ({
+    text: `Инфо ${item.get("id")}`,
+    callback_data: `/info ${item.get("id")}`
+  }));
+
   return bot.sendMessage(
     chatId,
     `*Информация о всех отслеживаемых ссылках*\n\n${text.join("\n\n")}`,
@@ -19,12 +24,7 @@ export default async function list(msg: Message) {
       disable_web_page_preview: true,
       reply_markup: {
         inline_keyboard: [
-          [
-            {
-              text: "/info 1",
-              callback_data: "dwadaw"
-            }
-          ]
+          [...buttons]
         ]
       }
     }

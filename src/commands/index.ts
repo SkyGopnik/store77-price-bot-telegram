@@ -28,6 +28,16 @@ bot.onText(/\/test/, () => Links.checkPrices());
 bot.on('callback_query', async (callbackQuery) => {
   await bot.answerCallbackQuery(callbackQuery.id);
 
+  if (!callbackQuery.data) {
+    return;
+  }
+
+  if (/\/info (.+)/.test(callbackQuery.data)) {
+    const id = callbackQuery.data.split(" ")[1];
+
+    console.log(id);
+  }
+
   console.log(callbackQuery);
   // console.log(callbackQuery.message);
 });
