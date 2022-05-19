@@ -42,7 +42,7 @@ export default async function info(msg: Message, match: RegExpMatchArray | null)
 
   return bot.sendMessage(
     chatId,
-    `*Информация о ${link.get("name")}* _(ID - ${link.get("id")})_\n\n*Пики цен*\n+ Максимальная - ${highestPrice}\n- Минимальная - ${lowestPrice}\n\n*Изменение цен*\n${prices.join("\n")}`,
+    `*Информация о ${link.get("name")}* _(ID - ${link.get("id")})_\n\n*Пики цен*\n+ Максимальная - _${highestPrice}_ рублей\n- Минимальная - *${lowestPrice}* рублей\n\n*Изменение цен*\n${prices.join("\n")}`,
     {
       parse_mode: 'Markdown'
     }
