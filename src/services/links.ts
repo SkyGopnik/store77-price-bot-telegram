@@ -19,7 +19,13 @@ export default class Links {
 
   static async list() {
     return LinkModel.findAll({
-      include: [ LinkInfoModel ]
+      include: [{
+        model: LinkInfoModel,
+        as: "info",
+        order: [
+          ['createdAt', 'DESC']
+        ]
+      }]
     });
   }
 
@@ -74,28 +80,29 @@ export default class Links {
 
         const priceIsUp = newPrice > oldPrice;
 
-        bot.sendMessage(
-          item.get("chatId"),
-          `🔥 *${item.get("name")}* _(ID - ${item.get("id")})_ 🔥\n\nЦена *${priceIsUp ? "повысилась" : "понизилась"}*\n_Старая цена:_ ${oldPrice} рублей\n*Новая цена:* ${newPrice} рублей`,
-          {
-            parse_mode: 'Markdown',
-            reply_markup: {
-              inline_keyboard: [
-                [
-                  {
-                    text: "Подробнее",
-                    callback_data: `/info ${item.get("id")}`
-                  }
+        await Promise.all([
+          bot.sendMessage(
+            item.get("chatId"),
+            `🔥 *${item.get("name")}* _(ID - ${item.get("id")})_ 🔥\n\nЦена *${priceIsUp ? "повысилась" : "понизилась"}*\n_Старая цена:_ ${oldPrice} рублей\n*Новая цена:* ${newPrice} рублей`,
+            {
+              parse_mode: 'Markdown',
+              reply_markup: {
+                inline_keyboard: [
+                  [
+                    {
+                      text: "Подробнее",
+                      callback_data: `/info ${item.get("id")}`
+                    }
+                  ]
                 ]
-              ]
+              }
             }
-          }
-        );
-
-        await LinkInfoModel.create({
-          price: +price,
-          linkId: item.get("id")
-        });
+          ),
+          LinkInfoModel.create({
+            price: +price,
+            linkId: item.get("id")
+          })
+        ]);
       })
     );
   }
