@@ -17,6 +17,8 @@ export default class PuppeteerService {
       .replace("—", "")
       .replace(/\s/g, '');
 
+    console.log(name, price);
+
     if (+price <= 0) {
       throw Error("Price not valid");
     }
