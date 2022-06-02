@@ -23,7 +23,7 @@ export default class Links {
         model: LinkInfoModel,
         as: "info",
         order: [
-          ['createdAt', 'DESC']
+          ['id', 'DESC']
         ]
       }]
     });

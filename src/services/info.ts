@@ -11,7 +11,7 @@ export default class InfoService {
         model: LinkInfoModel,
         as: "info",
         order: [
-          ['createdAt', 'DESC']
+          ['id', 'DESC']
         ]
       }],
       where: {
