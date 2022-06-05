@@ -19,7 +19,7 @@ const db:Sequelize = new Sequelize({
   pool: config.pool,
   define: config.define,
 
-  logging: false,
+  logging: true,
 
   models: [__dirname + '/**/*.model.*'],
   modelMatch: (filename, member) => {
