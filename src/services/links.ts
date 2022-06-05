@@ -21,11 +21,11 @@ export default class Links {
     return LinkModel.findAll({
       include: [{
         model: LinkInfoModel,
-        as: "info",
-        order: [
-          ['id', 'ASC']
-        ]
-      }]
+        as: "info"
+      }],
+      order: [
+        [LinkInfoModel, 'id', 'ASC']
+      ]
     });
   }
 

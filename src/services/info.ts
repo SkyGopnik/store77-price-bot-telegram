@@ -9,11 +9,11 @@ export default class InfoService {
     const link = await LinkModel.findOne({
       include: [{
         model: LinkInfoModel,
-        as: "info",
-        order: [
-          ['id', 'ASC']
-        ]
+        as: "info"
       }],
+      order: [
+        [LinkInfoModel, 'id', 'ASC']
+      ],
       where: {
         id: infoId
       }
