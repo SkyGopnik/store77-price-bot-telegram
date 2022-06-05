@@ -19,12 +19,9 @@ export default class Links {
 
   static async list() {
     return LinkModel.findAll({
-      include: [{
-        model: LinkInfoModel,
-        as: "info"
-      }],
+      include: [ LinkInfoModel ],
       order: [
-        [LinkInfoModel, 'id', 'ASC']
+        [ LinkInfoModel, 'id', 'ASC' ]
       ]
     });
   }
