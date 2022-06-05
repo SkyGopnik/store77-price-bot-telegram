@@ -19,10 +19,18 @@ export default class Links {
 
   static async list() {
     return LinkModel.findAll({
-      include: [ LinkInfoModel ],
+      include: [{
+        model: LinkInfoModel,
+        as: "info"
+      }],
       order: [
-        [ LinkInfoModel, 'id', 'ASC' ]
-      ]
+        [
+          {
+            model: LinkInfoModel,
+            as: "info"
+          }, 'id', 'ASC'
+        ]
+      ],
     });
   }
 

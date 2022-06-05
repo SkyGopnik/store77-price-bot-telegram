@@ -7,9 +7,17 @@ import moment from "moment";
 export default class InfoService {
   static async get(chatId: number, infoId: string | number) {
     const link = await LinkModel.findOne({
-      include: [ LinkInfoModel ],
+      include: [{
+        model: LinkInfoModel,
+        as: "info"
+      }],
       order: [
-        [ LinkInfoModel, 'id', 'ASC' ]
+        [
+          {
+            model: LinkInfoModel,
+            as: "info"
+          }, 'id', 'ASC'
+        ]
       ],
       where: {
         id: infoId
