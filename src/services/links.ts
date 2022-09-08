@@ -3,7 +3,7 @@ import { bot } from "@commands";
 import LinkInfoModel from "@models/link.info.model";
 import LinkModel from "@models/link.model";
 
-import PuppeteerService from "@services/puppeteer";
+import ParseService from "@services/parse";
 
 import numberFormat from "@functions/numberFormat";
 
@@ -35,7 +35,7 @@ export default class Links {
   }
 
   static async create(chatId: number, link: string) {
-    const { name, price, image } = await PuppeteerService.getInfo(link);
+    const { name, price, image } = await ParseService.getInfo(link);
 
     const linkModel = await LinkModel.create({
       chatId,
@@ -70,7 +70,7 @@ export default class Links {
 
     await Promise.all(
       list.map(async (item) => {
-        const { price } = await PuppeteerService.getInfo(item.get("link"));
+        const { price } = await ParseService.getInfo(item.get("link"));
 
         const info = item.get("info");
 

@@ -2,8 +2,10 @@ import InfoService from "@services/info";
 
 import { Message } from "node-telegram-bot-api";
 
-export default async function info(msg: Message, match: RegExpMatchArray | null) {
+export default async function infoMore(msg: Message, match: RegExpMatchArray | null) {
   const chatId = msg.chat.id;
+
+  const { message_id: replyId } = msg;
 
   if (!match) {
     return;
@@ -11,6 +13,5 @@ export default async function info(msg: Message, match: RegExpMatchArray | null)
 
   const id = +match[1];
 
-  return InfoService.get(chatId, id);
+  return InfoService.more(chatId, replyId, id);
 }
-

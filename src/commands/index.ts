@@ -7,6 +7,7 @@ import list from "@commands/list";
 import remove from "@commands/remove";
 import info from "@commands/info";
 import help from "@commands/help";
+import infoMore from "@commands/infoMore";
 
 const keys = require("@config/keys.json");
 
@@ -21,6 +22,8 @@ bot.onText(/\/help/, help);
 bot.onText(/\/watch (.+)/, watch);
 
 bot.onText(/\/info (.+)/, info);
+
+bot.onText(/\/info_more (.+)/, infoMore);
 
 bot.onText(/\/remove (.+)/, remove);
 
@@ -43,5 +46,17 @@ bot.on('callback_query', async (callbackQuery) => {
     }
 
     return InfoService.get(callbackQuery.message?.chat.id, id);
+  }
+
+  if (/\/info_more (.+)/.test(data)) {
+    const id = data.split(" ")[1];
+
+    if (!callbackQuery.message) {
+      return;
+    }
+
+    const { message_id: replyId } = callbackQuery.message;
+
+    return InfoService.more(callbackQuery.message?.chat.id, replyId, id);
   }
 });

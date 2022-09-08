@@ -9,7 +9,7 @@ export default async function list(msg: Message) {
 
   const list = await Links.list();
 
-  const text = list.map((item) => `[${item.get("name")}](${item.get("link")}) _(ID - ${item.get("id")})_`);
+  const text = list.map((item) => `[${item.get("name")}](${item.get("link")})`);
 
   const buttons = list.map((item) => ({
     text: item.get("id"),

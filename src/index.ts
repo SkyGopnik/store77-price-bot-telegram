@@ -1,8 +1,5 @@
-const CronJob = require('cron').CronJob;
-
-// @ts-ignore
-process.env.NTBA_FIX_319 = 1;
-
+import axios from "axios";
+import https from "https";
 import moment from "moment";
 import 'moment/locale/ru';
 
@@ -15,7 +12,16 @@ import db from '@models';
 
 import "@commands";
 
+const CronJob = require('cron').CronJob;
+
+// @ts-ignore
+process.env.NTBA_FIX_319 = 1;
+
 moment.locale('ru');
+
+axios.defaults.httpsAgent = new https.Agent({
+  rejectUnauthorized: false,
+});
 
 (async () => {
   await db.sync({ force: false });

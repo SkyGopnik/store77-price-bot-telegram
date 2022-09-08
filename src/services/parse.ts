@@ -1,13 +1,13 @@
+import axios from "axios";
+
 import cheerio from "cheerio";
 
-import Puppeteer from "@helpers/puppeteer";
-
-export default class PuppeteerService {
+export default class ParseService {
 
   static async getInfo(link: string) {
-    const content = await Puppeteer.getContent(link);
+    const content = await axios.get(link);
 
-    const $ = cheerio.load(content);
+    const $ = cheerio.load(content.data);
 
     const name = $('h1.title_card_product:first')
       .text();
@@ -16,8 +16,6 @@ export default class PuppeteerService {
       .text()
       .replace("—", "")
       .replace(/\s/g, '');
-
-    console.log(name, price);
 
     if (+price <= 0) {
       throw Error("Price not valid");
