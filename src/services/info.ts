@@ -30,7 +30,7 @@ export default class InfoService {
 
     const onlyPrices = [...link.get("info").map((item) => item.get("price"))];
 
-    const currentPrice = onlyPrices[0];
+    const currentPrice = onlyPrices[onlyPrices.length - 1];
 
     const lowestPrice = Math.min.apply(null, onlyPrices);
     const highestPrice = Math.max.apply(null, onlyPrices);
