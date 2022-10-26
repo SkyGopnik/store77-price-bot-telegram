@@ -27,7 +27,7 @@ bot.onText(/\/info_more (.+)/, infoMore);
 
 bot.onText(/\/remove (.+)/, remove);
 
-bot.onText(/\/test/, () => Links.checkPrices());
+bot.onText(/\/sync/, () => Links.checkPrices());
 
 bot.on('callback_query', async (callbackQuery) => {
   const { id, data } = callbackQuery;

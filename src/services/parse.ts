@@ -15,7 +15,8 @@ export default class ParseService {
     const price = $('p.price_title_product:first')
       .text()
       .replace("—", "")
-      .replace(/\s/g, '');
+      .replace(/\s/g, '')
+      .replace("Р", '');
 
     if (+price <= 0) {
       throw Error("Price not valid");
